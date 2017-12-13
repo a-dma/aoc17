@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io::{BufReader, BufRead, Seek, SeekFrom};
+use std::io::{BufReader, BufRead};
 
 #[derive(Debug)]
 struct Point {
@@ -50,11 +50,10 @@ impl Point {
 }
 
 fn problem<R: BufRead>(reader: &mut R) -> (u32, u32) {
-    let mut list: Vec<u8> = (0..256).map(|x| x as u8).collect();
     let mut input = String::new();
     reader.read_line(&mut input).unwrap();
     input.pop();
-    let mut directions: Vec<&str> = input.split(",")
+    let directions: Vec<&str> = input.split(",")
         .collect();
 
     let mut point = Point {
